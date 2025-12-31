@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Websites, die Verkaufen.</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22 font-family=%22sans-serif%22 font-weight=%22900%22 fill=%22white%22>V</text></svg>">
+    
+    <!-- PRELOAD HERO IMAGES (Crucial for LCP Speed) -->
+    <!-- Desktop Image -->
+    <link rel="preload" as="image" href="https://i.postimg.cc/kgDQKrvj/Unbenannt-1.png" media="(min-width: 1024px)">
+    <!-- Mobile Image -->
+    <link rel="preload" as="image" href="https://i.postimg.cc/VshSbS5B/304d460a-ccb0-4175-8ee1-6768640cab66.png" media="(max-width: 1023px)">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -82,14 +89,14 @@
 <script type="importmap">
 {
   "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
     "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
     "react/": "https://esm.sh/react@^19.2.3/",
-    "react": "https://esm.sh/react@^19.2.3",
-    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
-    "class-variance-authority": "https://esm.sh/class-variance-authority@^0.7.1",
     "motion/": "https://esm.sh/motion@^12.23.26/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
     "clsx": "https://esm.sh/clsx@^2.1.1",
-    "tailwind-merge": "https://esm.sh/tailwind-merge@^3.4.0"
+    "tailwind-merge": "https://esm.sh/tailwind-merge@^3.4.0",
+    "class-variance-authority": "https://esm.sh/class-variance-authority@^0.7.1"
   }
 }
 </script>

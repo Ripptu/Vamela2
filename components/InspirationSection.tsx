@@ -39,6 +39,8 @@ export const InspirationSection = () => {
               <img
                 src={image.src}
                 alt={image.alt}
+                loading="lazy"
+                decoding="async"
                 className="pointer-events-none absolute h-full w-full object-cover opacity-80 hover:opacity-100 transition-opacity duration-500"
               />
             </GridItem>

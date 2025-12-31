@@ -100,6 +100,8 @@ export const About = () => {
                   <img 
                     src={images[currentImage].src} 
                     alt={images[currentImage].alt} 
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover pointer-events-none"
                   />
                   

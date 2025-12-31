@@ -78,12 +78,20 @@ export const Hero: React.FC = () => {
               src="https://i.postimg.cc/VshSbS5B/304d460a-ccb0-4175-8ee1-6768640cab66.png" 
               alt="Christian - Vamela Founder" 
               className="w-full h-full object-cover object-center md:object-top lg:hidden"
+              // Optimized loading strategy
+              loading="eager"
+              decoding="sync"
+              fetchPriority="high"
             />
             {/* Desktop Image */}
             <img 
               src="https://i.postimg.cc/kgDQKrvj/Unbenannt-1.png" 
               alt="Christian - Vamela Founder" 
               className="hidden lg:block w-full h-full object-cover object-top"
+              // Optimized loading strategy
+              loading="eager"
+              decoding="sync"
+              fetchPriority="high"
             />
             
             {/* Gradient: Fades image into black at the bottom */}
