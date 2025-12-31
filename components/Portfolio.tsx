@@ -21,22 +21,10 @@ const projects = [
     url: "https://barbermoosburg.netlify.app"
   },
   {
-    title: "Kleeb Bau",
+    title: "Kleeberger Sanierung",
     category: "Construction",
     image: "https://higgsfield.ai/_next/image?url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_2zg6kRsQgLvpBAc5mmGVtMaqZi0%2F94316c16-a657-43c4-a7cd-8840d782ed32.png&w=1080&q=75",
     url: "https://kleeb.netlify.app"
-  },
-  {
-    title: "Architektur M.",
-    category: "Portfolio",
-    image: "https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2787&auto=format&fit=crop", // Placeholder
-    url: "#"
-  },
-  {
-    title: "Green Garden",
-    category: "Landschaftsbau",
-    image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?q=80&w=2000&auto=format&fit=crop", // Placeholder
-    url: "#"
   }
 ];
 
@@ -53,8 +41,8 @@ export const Portfolio = () => {
            </h2>
         </div>
 
-        {/* Updated Grid: 3 columns on desktop, less vertical height images */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
+        {/* Updated Grid: 2 columns to balance 4 items perfectly */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16">
           {projects.map((project, index) => (
             <a 
               key={index} 
@@ -63,7 +51,7 @@ export const Portfolio = () => {
               rel="noreferrer"
               className="group block"
             >
-              {/* Aspect Ratio changed from portrait [3/4] to standard [4/3] to make them smaller */}
+              {/* Aspect Ratio 4/3 */}
               <div className="relative overflow-hidden mb-6 aspect-[4/3] bg-[#111]">
                  <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
                  <img 
@@ -86,12 +74,6 @@ export const Portfolio = () => {
               </div>
             </a>
           ))}
-        </div>
-
-        <div className="mt-24 text-center">
-           <a href="#" className="inline-block border border-white/20 rounded-full px-8 py-4 text-sm font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all">
-              Alle Projekte ansehen
-           </a>
         </div>
 
       </div>

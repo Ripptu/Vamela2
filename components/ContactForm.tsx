@@ -55,7 +55,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onWarpStart }) => {
     onWarpStart(); // Optional effect
 
     const text = `Hi! Ich bin ${finalAnswers.name}.%0AThema: ${finalAnswers.type}.%0ABudget ca.: ${finalAnswers.budget}€.`;
-    const waUrl = `https://wa.me/4915100000000?text=${text}`;
+    const waUrl = `https://wa.me/4917624200179?text=${text}`;
 
     setTimeout(() => {
       window.open(waUrl, '_blank');

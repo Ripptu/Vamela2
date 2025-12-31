@@ -19,27 +19,13 @@ export const Footer: React.FC = () => {
              </p>
           </div>
 
-          {/* Links 1 */}
-          <div className="md:col-span-2 md:col-start-7">
-             <h4 className="font-serif italic text-xl mb-6 text-white">Menu</h4>
-             <ul className="space-y-3">
-               {['Projekte', 'Agentur', 'Services', 'Kontakt'].map(item => (
-                 <li key={item}>
-                   <a href="#" className="text-white/50 hover:text-orange-500 transition-colors text-sm uppercase tracking-wide">{item}</a>
-                 </li>
-               ))}
-             </ul>
-          </div>
-
-          {/* Links 2 */}
-          <div className="md:col-span-2">
+          {/* Socials - Moved to right align with Contact, Menu removed */}
+          <div className="md:col-span-2 md:col-start-9">
              <h4 className="font-serif italic text-xl mb-6 text-white">Socials</h4>
              <ul className="space-y-3">
-               {['Instagram', 'LinkedIn', 'WhatsApp'].map(item => (
-                 <li key={item}>
-                   <a href="#" className="text-white/50 hover:text-orange-500 transition-colors text-sm uppercase tracking-wide">{item}</a>
-                 </li>
-               ))}
+               <li>
+                 <a href="https://instagram.com/vamela_studio" target="_blank" rel="noreferrer" className="text-white/50 hover:text-orange-500 transition-colors text-sm uppercase tracking-wide">Instagram</a>
+               </li>
              </ul>
           </div>
 
@@ -47,10 +33,10 @@ export const Footer: React.FC = () => {
           <div className="md:col-span-2">
              <h4 className="font-serif italic text-xl mb-6 text-white">Kontakt</h4>
              <address className="not-italic text-white/50 text-sm space-y-3">
-               <p>Hofmark 15</p>
-               <p>84307 Eggenfelden</p>
+               <p className="font-bold text-white">Christian Stockmeier</p>
+               <p>85410 Haag an der Amper</p>
                <p className="mt-4">
-                 <a href="mailto:hallo@vamela.de" className="hover:text-white transition-colors">hallo@vamela.de</a>
+                 <a href="mailto:stockmeier.ch@gmail.com" className="hover:text-white transition-colors">stockmeier.ch@gmail.com</a>
                </p>
              </address>
           </div>
