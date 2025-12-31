@@ -9,13 +9,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
-    "lucide-react": "0.263.1",
-    "clsx": "2.1.1",
-    "tailwind-merge": "2.5.5",
-    "class-variance-authority": "0.7.1",
-    "motion": "^12.23.26"
+    "react-dom": "^19.2.3",
+    "react": "^19.2.3",
+    "lucide-react": "^0.562.0",
+    "class-variance-authority": "^0.7.1",
+    "motion": "^12.23.26",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
