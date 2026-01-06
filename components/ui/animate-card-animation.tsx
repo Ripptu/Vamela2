@@ -51,20 +51,20 @@ function CardContent({ projectIndex }: { projectIndex: number }) {
   const data = projects[projectIndex]
 
   return (
-    <div className="flex h-full w-full flex-col p-4 md:p-5">
-      {/* Image Container - Flex 1 to take available space */}
-      <div className="relative flex-1 w-full overflow-hidden rounded-xl bg-[#1a1a1a] border border-white/10 group">
+    <div className="flex w-full flex-col p-4 md:p-5">
+      {/* Image Container - Height adapts to image aspect ratio */}
+      <div className="relative w-full overflow-hidden rounded-xl bg-[#1a1a1a] border border-white/10 group">
         <img
           src={data.image || "/placeholder.svg"}
           alt={data.title}
           draggable={false}
-          className="h-full w-full select-none object-cover object-top transition-transform duration-700 group-hover:scale-105"
+          className="w-full h-auto select-none object-cover transition-transform duration-700 group-hover:scale-105"
         />
         {/* Shine effect */}
         <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
       </div>
       
-      {/* Footer Info - Fixed height roughly */}
+      {/* Footer Info */}
       <div className="flex w-full items-end justify-between gap-2 mt-4">
         <div className="flex min-w-0 flex-1 flex-col gap-1">
           <span className="text-[10px] font-mono text-orange-500 uppercase tracking-widest">{data.category}</span>
@@ -130,12 +130,10 @@ const AnimatedCard: React.FC<AnimatedCardProps> = ({
         damping: 25,
         mass: 1
       }}
-      // Dynamic Aspect Ratios:
-      // Mobile: 4/3 aspect ratio (Landscape-ish) to fit desktop screens better
-      // Desktop: 16/9 aspect ratio (True Landscape)
-      className="absolute bottom-0 w-[90vw] max-w-[450px] aspect-[4/3] md:w-[75vw] md:max-w-[900px] md:aspect-[16/9] origin-bottom"
+      // Dynamic Aspect Ratios: removed fixed aspect classes to let content drive height
+      className="absolute bottom-0 w-[90vw] max-w-[450px] md:w-[75vw] md:max-w-[900px] origin-bottom"
     >
-      <div className="h-full w-full overflow-hidden rounded-2xl md:rounded-3xl border border-white/10 bg-[#141414] shadow-2xl backdrop-blur-md">
+      <div className="w-full h-full overflow-hidden rounded-2xl md:rounded-3xl border border-white/10 bg-[#141414] shadow-2xl backdrop-blur-md">
         <CardContent projectIndex={card.projectIndex} />
       </div>
     </motion.div>
@@ -170,11 +168,11 @@ export default function AnimatedCardStack() {
     <div className="flex w-full flex-col items-center justify-center">
       {/* 
          Container Height Adjustment: 
-         - Needs to be tall enough for the aspect-ratio cards + floating distance.
-         - Mobile: ~380px is enough for a 4:3 card of 90vw width
-         - Desktop: ~600px is enough for a 16:9 card of 900px width
+         - Increased height to accommodate potentially taller aspect ratios
+         - Mobile: 420px (was 380px)
+         - Desktop: 700px (was 600px)
       */}
-      <div className="relative h-[380px] md:h-[600px] w-full flex justify-center items-end overflow-visible px-4">
+      <div className="relative h-[420px] md:h-[700px] w-full flex justify-center items-end overflow-visible px-4">
         <AnimatePresence mode="popLayout">
           {cards.map((card, index) => (
             <AnimatedCard 
