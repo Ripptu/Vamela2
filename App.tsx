@@ -8,6 +8,8 @@ import { About } from './components/About';
 import { FAQ } from './components/FAQ';
 import { ContactForm } from './components/ContactForm';
 import { Impressum, Datenschutz, AGB } from './components/LegalPages';
+import { motion, AnimatePresence } from 'motion/react';
+import { MessageCircle, Sparkles } from 'lucide-react';
 
 // Scroll Reveal Component
 const Reveal: React.FC<{ children: React.ReactNode; className?: string; delay?: number }> = ({ 
@@ -51,9 +53,44 @@ const Reveal: React.FC<{ children: React.ReactNode; className?: string; delay?: 
   );
 };
 
+// Mobile Floating Action Bar (Glassmorphism)
+const MobileFloatingBar = ({ isVisible }: { isVisible: boolean }) => {
+  return (
+    <AnimatePresence>
+      {isVisible && (
+        <motion.div
+          initial={{ y: 100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: 100, opacity: 0 }}
+          transition={{ type: "spring", stiffness: 260, damping: 20 }}
+          className="fixed bottom-6 left-0 w-full px-4 z-50 md:hidden pointer-events-none"
+        >
+          <div className="pointer-events-auto max-w-sm mx-auto bg-black/60 backdrop-blur-xl border border-white/10 rounded-full p-2 pl-6 flex items-center justify-between shadow-2xl ring-1 ring-white/5">
+             <span className="text-white font-medium text-sm flex items-center gap-2">
+               <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                </span>
+               Projekt starten?
+             </span>
+             <button 
+               onClick={() => window.open('https://wa.me/4917624200179', '_blank')}
+               className="bg-white text-black rounded-full px-5 py-2.5 font-bold text-sm flex items-center gap-2 active:scale-95 transition-transform"
+             >
+               <MessageCircle className="w-4 h-4" />
+               WhatsApp
+             </button>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
+
 export default function App() {
   const [isWarping, setIsWarping] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [showFloatingBar, setShowFloatingBar] = useState(false);
   
   // Custom Hash Router State
   const [currentHash, setCurrentHash] = useState(window.location.hash);
@@ -67,9 +104,13 @@ export default function App() {
       history.scrollRestoration = 'manual';
     }
 
-    // Scroll handling for sticky nav
+    // Scroll handling for sticky nav and floating bar
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      const scrollY = window.scrollY;
+      setIsScrolled(scrollY > 50);
+      
+      // Show floating bar after Hero section (approx 80vh)
+      setShowFloatingBar(scrollY > window.innerHeight * 0.8);
     };
 
     // Hash change handling for routing
@@ -99,7 +140,7 @@ export default function App() {
       default:
         // Default Landing Page Content
         return (
-          <main className="relative z-10 w-full flex flex-col">
+          <main className="relative z-10 w-full flex flex-col pb-20 md:pb-0">
             
             {/* HERO */}
             <Hero />
@@ -186,13 +227,15 @@ export default function App() {
                 <img src="https://i.postimg.cc/tJjgBcYZ/Logo-weiss.png" alt="Vamela" className="h-8 w-auto opacity-90" />
              )}
          </div>
-         <div className="pointer-events-auto">
-            {/* Hamburger or Menu could go here */}
-         </div>
       </nav>
 
       {/* RENDER CONTENT BASED ON ROUTE */}
       {renderContent()}
+      
+      {/* Mobile Floating Bar (Only on Home) */}
+      {(currentHash === '' || currentHash === '#') && (
+        <MobileFloatingBar isVisible={showFloatingBar} />
+      )}
 
       <Footer />
       

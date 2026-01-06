@@ -156,7 +156,7 @@ export const About = () => {
              className="mb-8"
            >
              <span className="block font-sans font-black text-white text-5xl md:text-7xl tracking-tighter leading-[0.9]">
-               Moin, ich bin
+               Servus, ich bin
              </span>
              <span className="block font-serif font-light italic text-orange-500 text-6xl md:text-8xl -mt-2 md:-mt-4">
                Christian.

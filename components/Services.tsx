@@ -167,8 +167,6 @@ export const Services = () => {
       setActiveId(null);
     } else {
       setActiveId(id);
-      // Optional: Reset details when switching main tabs? 
-      // Let's keep them closed by default when switching
       setDetailsVisible({}); 
     }
   };
@@ -190,22 +188,22 @@ export const Services = () => {
           {services.map((service) => (
             <div 
               key={service.id} 
-              className="group border-b border-white/10 transition-colors hover:border-white/30"
+              className="group border-b border-white/10 transition-all duration-300 hover:border-white/30"
             >
               <button 
                 onClick={() => toggleAccordion(service.id)}
-                className="w-full flex items-start md:items-center justify-between py-8 md:py-12 text-left outline-none"
+                className="w-full flex items-start md:items-center justify-between py-6 md:py-12 text-left outline-none touch-manipulation active:scale-[0.98] active:bg-white/5 transition-all duration-200 rounded-lg md:rounded-none px-2 md:px-0 -mx-2 md:mx-0"
               >
-                <div className="flex items-baseline gap-6 md:gap-16">
-                   <span className="font-mono text-sm md:text-lg text-white/40">{service.id}</span>
-                   <h3 className={`text-2xl md:text-5xl font-serif transition-colors duration-300 ${activeId === service.id ? 'text-orange-500' : 'text-white group-hover:text-white/80'}`}>
+                <div className="flex items-baseline gap-4 md:gap-16">
+                   <span className="font-mono text-xs md:text-lg text-white/40 pt-1 md:pt-0">{service.id}</span>
+                   <h3 className={`text-xl md:text-5xl font-serif transition-colors duration-300 ${activeId === service.id ? 'text-orange-500' : 'text-white group-hover:text-white/80'}`}>
                      {service.title}
                    </h3>
                 </div>
                 
                 {/* Mobile/Desktop Arrow Interaction */}
-                <div className={`transform transition-transform duration-300 ${activeId === service.id ? 'rotate-90 text-orange-500' : 'rotate-0 text-white/40'}`}>
-                   <ArrowRight className="w-6 h-6 md:w-8 md:h-8" />
+                <div className={`transform transition-transform duration-300 flex-shrink-0 ${activeId === service.id ? 'rotate-90 text-orange-500' : 'rotate-0 text-white/40'}`}>
+                   <ArrowRight className="w-5 h-5 md:w-8 md:h-8" />
                 </div>
               </button>
 
@@ -218,9 +216,9 @@ export const Services = () => {
                     transition={{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] }}
                     className="overflow-hidden"
                   >
-                    <div className="pl-12 md:pl-[6.5rem] pb-10 pr-4 md:pr-0 max-w-2xl">
+                    <div className="pl-0 md:pl-[6.5rem] pb-8 pr-0 max-w-2xl px-2 md:px-0">
                        {/* Short Description */}
-                       <p className="text-lg text-white/60 font-light leading-relaxed mb-6">
+                       <p className="text-base md:text-lg text-white/60 font-light leading-relaxed mb-6">
                          {service.shortDescription}
                        </p>
                        
@@ -228,7 +226,7 @@ export const Services = () => {
                        <div className="flex flex-col items-start">
                          <button 
                             onClick={(e) => toggleDetails(service.id, e)}
-                            className="text-orange-500 text-sm font-bold uppercase tracking-widest flex items-center gap-2 cursor-pointer hover:text-white transition-colors py-2"
+                            className="text-orange-500 text-sm font-bold uppercase tracking-widest flex items-center gap-2 cursor-pointer hover:text-white transition-colors py-3 md:py-2 active:scale-95 origin-left"
                          >
                            {detailsVisible[service.id] ? "Weniger anzeigen" : "Mehr dazu"} 
                            <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${detailsVisible[service.id] ? 'rotate-180' : ''}`} />
@@ -244,7 +242,7 @@ export const Services = () => {
                                     transition={{ duration: 0.3 }}
                                     className="overflow-hidden"
                                 >
-                                    <div className="p-6 md:p-8 bg-white/[0.03] rounded-xl border border-white/5 text-white/80 font-light leading-relaxed text-base">
+                                    <div className="p-5 md:p-8 bg-white/[0.03] rounded-xl border border-white/5 text-white/80 font-light leading-relaxed text-sm md:text-base">
                                         {service.details}
                                     </div>
                                 </motion.div>

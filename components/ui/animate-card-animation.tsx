@@ -103,7 +103,7 @@ const AnimatedCard: React.FC<AnimatedCardProps> = ({
     opacity: 0,
     scale: 1.05,
     rotateX: -5,
-    transition: { duration: 0.35, ease: "easeIn" }
+    transition: { duration: 0.35, ease: "easeIn" as const }
   };
 
   // Entry animation for the new back card
