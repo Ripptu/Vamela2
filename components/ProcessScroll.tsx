@@ -128,29 +128,28 @@ const ChatInterface = () => {
   return (
     <div ref={containerRef} className="w-full h-full flex flex-col bg-[#0b141a] font-sans">
       
-      {/* PHONE HEADER (Simulating WhatsApp/Messenger) */}
-      <div className="bg-[#202c33] px-4 pt-10 pb-3 flex items-center justify-between border-b border-white/5 shadow-md z-10 shrink-0">
-         <div className="flex items-center gap-3">
-             <ChevronLeft className="w-6 h-6 text-[#007aff]" />
-             
-             {/* Avatar / Logo Container */}
-             <div className="relative">
-                <img 
-                  src="https://i.postimg.cc/tJjgBcYZ/Logo-weiss.png" 
-                  alt="Vamela Logo" 
-                  className="h-10 w-10 object-contain rounded-full bg-black/20 p-1"
-                />
-             </div>
+      {/* PHONE HEADER (Optimized: Compact, Centered, No Status, Moved Up) */}
+      {/* Reduced padding-top and adjusted height for '30px up' feel relative to usual headers */}
+      <div className="bg-[#202c33] px-3 py-3 flex items-center justify-between border-b border-white/5 shadow-md z-20 shrink-0 relative">
+         
+         {/* Left Controls (Absolute to allow true centering of name) */}
+         <div className="flex items-center gap-1 z-10">
+             <ChevronLeft className="w-5 h-5 text-[#007aff]" />
+             <div className="text-[#007aff] text-sm">Zurück</div>
+         </div>
 
-             <div className="flex flex-col">
-                <span className="text-gray-100 font-bold text-base leading-tight">Christian</span>
-                <span className="text-orange-500 text-[11px] animate-pulse">Online</span>
+         {/* Centered Identity */}
+         <div className="absolute left-0 w-full flex justify-center items-center pointer-events-none">
+             <div className="flex flex-col items-center">
+                <span className="text-gray-100 font-bold text-sm leading-tight">Christian</span>
+                {/* Removed 'Online' status as requested */}
              </div>
          </div>
          
-         <div className="flex items-center gap-4 text-[#007aff]">
-             <Video className="w-6 h-6 opacity-40" />
-             <Phone className="w-5 h-5 opacity-40" />
+         {/* Right Controls */}
+         <div className="flex items-center gap-4 text-[#007aff] z-10">
+             <Video className="w-5 h-5 opacity-40" />
+             <Phone className="w-4 h-4 opacity-40" />
          </div>
       </div>
 
@@ -218,10 +217,10 @@ const ChatInterface = () => {
         <div className="text-[#007aff] p-2">
             <PlusIcon />
         </div>
-        <div className="flex-1 bg-[#2a3942] rounded-full h-9 px-4 flex items-center text-gray-400 text-sm">
+        <div className="flex-1 bg-[#2a3942] rounded-full h-8 px-4 flex items-center text-gray-400 text-sm">
             Nachricht...
         </div>
-        <div className="w-9 h-9 bg-[#005c4b] rounded-full flex items-center justify-center text-white">
+        <div className="w-8 h-8 bg-[#005c4b] rounded-full flex items-center justify-center text-white">
             <MicIcon />
         </div>
       </div>
@@ -236,21 +235,21 @@ const MicIcon = () => <svg viewBox="0 0 24 24" width="18" height="18" stroke="cu
 export const ProcessScroll = () => {
   const TitleComponent = (
     <>
-      <h1 className="text-4xl md:text-6xl font-serif text-white mb-8">
+      <h1 className="text-4xl md:text-6xl font-serif text-white mb-8 relative inline-block">
         Wie wir <br />
         <span className="relative inline-block mt-2 font-bold">
             <span className="relative z-10">zusammenarbeiten</span>
-            {/* Orange Stroke */}
+            {/* Optimized Orange Stroke: Thinner, More Frequent, Better Mobile Pos */}
             <svg 
-              className="absolute -bottom-2 left-0 w-full h-[0.3em] text-orange-500 -z-10" 
-              viewBox="0 0 100 15" 
+              className="absolute -bottom-1 md:-bottom-2 left-0 w-[110%] h-[0.4em] text-orange-500 -z-10 -translate-x-[5%]" 
+              viewBox="0 0 200 20" 
               preserveAspectRatio="none"
             >
               <path 
-                d="M0,10 C30,12 70,8 100,10" 
+                d="M0,10 Q10,18 20,10 T40,10 T60,10 T80,10 T100,10 T120,10 T140,10 T160,10 T180,10 T200,10" 
                 fill="none" 
                 stroke="currentColor" 
-                strokeWidth="6" 
+                strokeWidth="3" 
                 strokeLinecap="round"
                 className="opacity-90"
               />
@@ -262,7 +261,6 @@ export const ProcessScroll = () => {
 
   return (
     <div className="flex flex-col overflow-hidden">
-      {/* Removed bg-[#0a0a0a] for transparency */}
       <ContainerScroll titleComponent={TitleComponent} children={<ChatInterface />} />
     </div>
   );

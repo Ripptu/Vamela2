@@ -5,17 +5,18 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 const stats = [
   { label: "Jahre Erfahrung", value: "8+" },
   { label: "Zufriedene Kunden", value: "40+" },
-  { label: "Fokus", value: "100%" },
-  { label: "Qualität", value: "A+" },
+  { label: "Kaffee pro Tag", value: "4" },
+  { label: "Qualität", value: "100%" },
 ];
 
+// Ensure two distinct images are used for the slider
 const images = [
   {
     src: "https://i.postimg.cc/zDbjms7g/4995ad88-01bd-465e-9b20-c3178ee83d1e.png",
     alt: "Christian Portrait",
   },
   {
-    src: "https://i.postimg.cc/wvf0wfKC/70585c11-a1e8-444e-b6aa-c12fcbe61985.png",
+    src: "https://i.postimg.cc/wvf0wfKC/70585c11-a1e8-444e-b6aa-c12fcbe61985.png", // Using the working image as second slide
     alt: "Christian Working",
   }
 ];
@@ -71,7 +72,7 @@ export const About = () => {
         {/* Swipeable Image Slider */}
         <div className="w-full lg:w-1/2 relative h-[500px] md:h-[600px] flex items-center justify-center">
            
-           <div className="relative w-full h-full max-w-md mx-auto aspect-[4/5] rounded-2xl overflow-hidden border border-white/10 bg-[#111] shadow-2xl">
+           <div className="relative w-full h-full max-w-md mx-auto aspect-[4/5] rounded-2xl overflow-hidden border border-white/10 bg-[#111] shadow-2xl group">
               <AnimatePresence initial={false} custom={direction}>
                 <motion.div
                   key={currentImage}
@@ -112,14 +113,14 @@ export const About = () => {
               <div className="absolute bottom-6 right-6 flex gap-2 z-20">
                 <button 
                   onClick={() => paginate(-1)}
-                  className="p-2 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md transition-colors border border-white/5 text-white"
+                  className="p-3 rounded-full bg-black/40 hover:bg-orange-500 hover:text-white backdrop-blur-md transition-all border border-white/10 text-white shadow-lg active:scale-95"
                   aria-label="Previous Image"
                 >
                   <ChevronLeft className="w-5 h-5" />
                 </button>
                 <button 
                   onClick={() => paginate(1)}
-                  className="p-2 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md transition-colors border border-white/5 text-white"
+                  className="p-3 rounded-full bg-black/40 hover:bg-orange-500 hover:text-white backdrop-blur-md transition-all border border-white/10 text-white shadow-lg active:scale-95"
                   aria-label="Next Image"
                 >
                   <ChevronRight className="w-5 h-5" />
@@ -127,11 +128,16 @@ export const About = () => {
               </div>
 
               {/* Pagination Dots */}
-              <div className="absolute top-4 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+              <div className="absolute top-4 left-1/2 -translate-x-1/2 flex gap-2 z-20 bg-black/20 px-3 py-1.5 rounded-full backdrop-blur-sm">
                 {images.map((_, idx) => (
-                  <div 
+                  <button 
                     key={idx}
-                    className={`w-2 h-2 rounded-full transition-all duration-300 ${idx === currentImage ? 'bg-orange-500 w-4' : 'bg-white/30'}`}
+                    onClick={() => {
+                        const newDir = idx > currentImage ? 1 : -1;
+                        setDirection(newDir);
+                        setCurrentImage(idx);
+                    }}
+                    className={`h-1.5 rounded-full transition-all duration-300 ${idx === currentImage ? 'bg-orange-500 w-6' : 'bg-white/40 w-1.5 hover:bg-white'}`}
                   />
                 ))}
               </div>
@@ -150,25 +156,25 @@ export const About = () => {
              className="mb-8"
            >
              <span className="block font-sans font-black text-white text-5xl md:text-7xl tracking-tighter leading-[0.9]">
-               Warum
+               Moin, ich bin
              </span>
              <span className="block font-serif font-light italic text-orange-500 text-6xl md:text-8xl -mt-2 md:-mt-4">
-               ich?
+               Christian.
              </span>
            </motion.h2>
            
            <div className="space-y-6 text-lg text-muted font-light leading-relaxed mb-12">
              <p>
-               Ganz einfach: <strong>Kein Agentur-Overhead, keine stillen Post-Spiele.</strong> Bei mir sprichst du direkt mit dem Macher.
+               Vergiss mal kurz Agenturen, Anzugträger und kompliziertes Fachchinesisch. Ich bin einfach ein Typ, der verdammt gerne Webseiten baut. Und zwar solche, die dir wirklich was bringen.
              </p>
              <p>
-               Ich bin Christian, Web-Entwickler und Designer. Ich verstehe, dass du als Selbstständiger oder kleines Unternehmen keine Zeit für endlose Meetings hast. Du brauchst Ergebnisse. Eine Website, die funktioniert, gut aussieht und dein Business voranbringt.
+               Ich sitze nicht in einem Glaspalast, sondern arbeite direkt und persönlich mit dir. Wenn du anrufst, gehe ich dran. Wenn wir schreiben, antworte ich – und kein Chatbot.
              </p>
              <p>
-               Ich kombiniere technisches Know-how mit strategischem Marketing. Das Ergebnis? Digitale Lösungen, die nicht nur schön aussehen, sondern sich für dich bezahlt machen.
+               Mein Ziel? Dass du am Ende eine Seite hast, auf die du stolz bist. Keine Kopfschmerzen, kein Stress. Wir trinken (virtuell) einen Kaffee, du erzählst mir von deinem Business und ich kümmere mich um den Rest. So einfach kann das sein.
              </p>
              <p className="border-l-2 border-orange-500 pl-6 text-white/80 italic">
-               "Persönliche Betreuung, kurze Kommunikationswege und eine Umsetzung auf höchstem Niveau."
+               "Ehrlich, direkt und auf Augenhöhe. So macht Zusammenarbeit Spaß."
              </p>
            </div>
 
