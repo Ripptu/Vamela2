@@ -48,7 +48,7 @@ export const Services = () => {
   };
 
   return (
-    <section className="py-24 relative z-10">
+    <section className="py-24 relative z-10 bg-[#050505]">
       <div className="max-w-[1400px] mx-auto px-4 md:px-12">
         
         <div className="mb-16 md:mb-24">
@@ -67,8 +67,8 @@ export const Services = () => {
               transition={{ delay: index * 0.1 }}
               onClick={() => toggleAccordion(service.id)}
               className={`
-                group glass-panel rounded-3xl overflow-hidden cursor-pointer transition-all duration-500
-                ${activeId === service.id ? 'border-orange-500/50 bg-white/[0.08]' : 'hover:bg-white/[0.05]'}
+                group rounded-3xl overflow-hidden cursor-pointer transition-all duration-500 border border-white/5
+                ${activeId === service.id ? 'bg-white/[0.08] border-orange-500/50' : 'bg-[#111] hover:bg-white/[0.05]'}
               `}
             >
               <div className="p-6 md:p-8 flex flex-col md:flex-row md:items-center gap-6 md:gap-12">
@@ -113,7 +113,7 @@ export const Services = () => {
                     className="overflow-hidden"
                   >
                     <div className="px-6 md:px-8 pb-8 pt-0 md:pl-[8rem]">
-                        <div className="bg-black/20 rounded-xl p-6 border border-white/5 text-white/80 leading-relaxed font-light">
+                        <div className="bg-black/40 rounded-xl p-6 border border-white/5 text-white/80 leading-relaxed font-light">
                             <div className="flex items-center gap-2 mb-3 text-orange-500 font-bold text-sm uppercase tracking-wide">
                                 <Sparkles className="w-4 h-4" /> Deep Dive
                             </div>

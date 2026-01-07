@@ -9,22 +9,9 @@ import { FAQ } from './components/FAQ';
 import { ContactForm } from './components/ContactForm';
 import { Impressum, Datenschutz, AGB } from './components/LegalPages';
 import { motion, AnimatePresence } from 'motion/react';
-import { MessageCircle, Sparkles } from 'lucide-react';
+import { MessageCircle } from 'lucide-react';
 
-// Liquid Background Component
-const LiquidBackground = () => (
-  <div className="fixed inset-0 w-full h-full overflow-hidden -z-10 pointer-events-none bg-[#050505]">
-    {/* Ambient Light Orbs */}
-    <div className="absolute top-[-10%] left-[-10%] w-[70vw] h-[70vw] bg-purple-500/10 rounded-full mix-blend-screen filter blur-[120px] animate-blob" />
-    <div className="absolute top-[-10%] right-[-10%] w-[70vw] h-[70vw] bg-orange-500/10 rounded-full mix-blend-screen filter blur-[120px] animate-blob animation-delay-2000" />
-    <div className="absolute bottom-[-20%] left-[20%] w-[70vw] h-[70vw] bg-blue-500/10 rounded-full mix-blend-screen filter blur-[120px] animate-blob animation-delay-4000" />
-    
-    {/* Noise Texture Overlay for Glass realism */}
-    <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'url("https://grainy-gradients.vercel.app/noise.svg")' }}></div>
-  </div>
-);
-
-// Scroll Reveal Component with 3D feel
+// Scroll Reveal Component
 const Reveal: React.FC<{ children: React.ReactNode; className?: string; delay?: number }> = ({ 
   children, 
   className = "", 
@@ -56,10 +43,10 @@ const Reveal: React.FC<{ children: React.ReactNode; className?: string; delay?: 
   return (
     <div 
       ref={ref} 
-      className={`transition-all duration-1000 ease-out transform perspective-1000 ${
+      className={`transition-all duration-1000 ease-out transform ${
         isVisible 
-          ? 'opacity-100 translate-y-0 rotate-x-0 scale-100' 
-          : 'opacity-0 translate-y-12 rotate-x-6 scale-95'
+          ? 'opacity-100 translate-y-0' 
+          : 'opacity-0 translate-y-12'
       } ${className}`}
       style={{ transitionDelay: `${delay}ms` }}
     >
@@ -68,7 +55,7 @@ const Reveal: React.FC<{ children: React.ReactNode; className?: string; delay?: 
   );
 };
 
-// Mobile Floating Action Bar (Glassmorphism)
+// Mobile Floating Action Bar
 const MobileFloatingBar = ({ isVisible }: { isVisible: boolean }) => {
   return (
     <AnimatePresence>
@@ -80,7 +67,7 @@ const MobileFloatingBar = ({ isVisible }: { isVisible: boolean }) => {
           transition={{ type: "spring", stiffness: 260, damping: 20 }}
           className="fixed bottom-6 left-0 w-full px-4 z-50 md:hidden pointer-events-none"
         >
-          <div className="pointer-events-auto glass-panel rounded-full p-2 pl-6 flex items-center justify-between shadow-2xl ring-1 ring-white/10">
+          <div className="pointer-events-auto bg-[#1a1a1a]/90 backdrop-blur-md rounded-full p-2 pl-6 flex items-center justify-between shadow-2xl border border-white/10">
              <span className="text-white font-medium text-sm flex items-center gap-2">
                <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -110,8 +97,7 @@ export default function App() {
 
   useEffect(() => {
     const scrollReset = () => window.scrollTo(0, 0);
-    scrollReset();
-    requestAnimationFrame(scrollReset);
+    scrollReset(); // Initial reset
     
     if ('scrollRestoration' in history) {
       history.scrollRestoration = 'manual';
@@ -125,7 +111,7 @@ export default function App() {
 
     const handleHashChange = () => {
       setCurrentHash(window.location.hash);
-      window.scrollTo(0, 0); 
+      window.scrollTo(0, 0);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -147,8 +133,8 @@ export default function App() {
           <main className="relative z-10 w-full flex flex-col pb-20 md:pb-0">
             <Hero />
 
-            <section className="py-24 md:py-32 px-4 md:px-6 relative">
-              <div className="max-w-6xl mx-auto glass-panel rounded-[30px] p-8 md:p-16 relative overflow-hidden">
+            <section className="py-24 md:py-32 px-4 md:px-6 relative bg-[#0a0a0a]">
+              <div className="max-w-6xl mx-auto border border-white/5 bg-[#111] rounded-[30px] p-8 md:p-16 relative overflow-hidden">
                 <Reveal>
                   <div className="grid md:grid-cols-2 gap-12 md:gap-24 items-start relative z-10">
                      <div>
@@ -180,7 +166,7 @@ export default function App() {
             <FAQ />
             <About />
 
-            <section className="py-24 md:py-32 px-4 md:px-6 relative z-10">
+            <section className="py-24 md:py-32 px-4 md:px-6 relative z-10 bg-[#0a0a0a]">
               <div className="max-w-4xl mx-auto mb-16 text-center">
                  <Reveal>
                    <h2 className="text-5xl md:text-8xl mb-6 leading-[0.9]">
@@ -204,33 +190,35 @@ export default function App() {
     }
   };
 
-  return (
-    <div className="relative min-h-screen w-full font-sans selection:bg-orange-500 selection:text-white overflow-x-hidden">
-      
-      <LiquidBackground />
+  const isLegalPage = ['#impressum', '#datenschutz', '#agb'].includes(currentHash);
 
+  return (
+    <div className="relative min-h-screen w-full font-sans bg-[#050505] selection:bg-orange-500 selection:text-white overflow-x-hidden">
+      
       {/* Header / Navigation */}
       <nav 
-        className={`fixed top-0 left-0 w-full z-50 px-6 py-6 flex justify-between items-center transition-all duration-500 ${isScrolled ? 'backdrop-blur-md bg-black/50 py-4 border-b border-white/5' : ''} ${isScrolled && currentHash === '' ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+        className={`fixed top-0 left-0 w-full z-50 px-6 py-6 flex justify-between items-center transition-all duration-500 
+          ${isScrolled ? 'backdrop-blur-md bg-black/80 py-4 border-b border-white/5' : ''} 
+          /* On home page: hide when scrolled if hash is empty (special hero behavior). On legal pages: always show. */
+          ${isScrolled && !isLegalPage && currentHash === '' ? 'opacity-0 pointer-events-none' : 'opacity-100'}
+        `}
       >
          <div className="pointer-events-auto">
-             {currentHash !== '' && currentHash !== '#' ? (
-                <a href="#" onClick={(e) => { e.preventDefault(); window.location.hash = ''; }}>
-                   <img src="https://i.postimg.cc/tJjgBcYZ/Logo-weiss.png" alt="Vamela" className="h-8 w-auto opacity-90" />
-                </a>
-             ) : (
-                <img src="https://i.postimg.cc/tJjgBcYZ/Logo-weiss.png" alt="Vamela" className="h-8 w-auto opacity-90" />
-             )}
+             <a href="#" onClick={(e) => { e.preventDefault(); window.location.hash = ''; }}>
+                <img src="https://i.postimg.cc/tJjgBcYZ/Logo-weiss.png" alt="Vamela" className="h-8 w-auto opacity-90 hover:opacity-100 transition-opacity" />
+             </a>
          </div>
       </nav>
 
       {renderContent()}
       
-      {(currentHash === '' || currentHash === '#') && (
+      {/* Floating Bar only on Home */}
+      {!isLegalPage && (
         <MobileFloatingBar isVisible={showFloatingBar} />
       )}
 
-      <Footer />
+      {/* Footer only on Home Page to keep Legal pages clean */}
+      {!isLegalPage && <Footer />}
       
     </div>
   );

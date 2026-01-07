@@ -3,6 +3,12 @@ import React from 'react';
 export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
+  const handleLegalNavigation = (e: React.MouseEvent<HTMLAnchorElement>, hash: string) => {
+    e.preventDefault();
+    window.location.hash = hash;
+    window.scrollTo(0, 0);
+  };
+
   return (
     <footer className="w-full bg-[#050505] pt-24 pb-12 px-6 border-t border-white/10">
       <div className="max-w-[1400px] mx-auto">
@@ -19,7 +25,7 @@ export const Footer: React.FC = () => {
              </p>
           </div>
 
-          {/* Socials - Moved to right align with Contact, Menu removed */}
+          {/* Socials */}
           <div className="md:col-span-2 md:col-start-9">
              <h4 className="font-serif italic text-xl mb-6 text-white">Socials</h4>
              <ul className="space-y-3">
@@ -46,9 +52,9 @@ export const Footer: React.FC = () => {
         {/* Bottom */}
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-[10px] md:text-xs font-mono uppercase tracking-widest text-white/30">
            <div className="flex gap-4 mb-4 md:mb-0">
-              <a href="#" className="hover:text-white">Impressum</a>
-              <a href="#" className="hover:text-white">Datenschutz</a>
-              <a href="#" className="hover:text-white">AGB</a>
+              <a href="#impressum" onClick={(e) => handleLegalNavigation(e, 'impressum')} className="hover:text-white transition-colors cursor-pointer">Impressum</a>
+              <a href="#datenschutz" onClick={(e) => handleLegalNavigation(e, 'datenschutz')} className="hover:text-white transition-colors cursor-pointer">Datenschutz</a>
+              <a href="#agb" onClick={(e) => handleLegalNavigation(e, 'agb')} className="hover:text-white transition-colors cursor-pointer">AGB</a>
            </div>
            <div>
               © {currentYear} Vamela Digital Arts

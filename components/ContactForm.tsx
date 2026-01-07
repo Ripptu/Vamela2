@@ -98,7 +98,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onWarpStart }) => {
         <motion.div 
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="text-center relative glass-panel rounded-[40px] p-12"
+            className="text-center relative bg-[#111] border border-white/10 rounded-[40px] p-12"
         >
             <div className="relative inline-block mb-8">
                 <motion.div 
@@ -120,13 +120,13 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onWarpStart }) => {
   return (
     <div className="w-full max-w-3xl mx-auto relative group perspective-1000">
       
-      {/* 3D Glass Container */}
-      <div className="relative glass-panel rounded-[40px] p-8 md:p-14 overflow-hidden min-h-[500px] flex flex-col shadow-[0_20px_60px_-15px_rgba(0,0,0,0.8)] border-t border-white/20">
+      {/* Container */}
+      <div className="relative bg-[#111] rounded-[40px] p-8 md:p-14 overflow-hidden min-h-[500px] flex flex-col border border-white/10 shadow-2xl">
         
         {/* Progress Bar */}
-        <div className="absolute top-0 left-0 w-full h-1.5 bg-white/5">
+        <div className="absolute top-0 left-0 w-full h-1 bg-white/5">
            <motion.div 
-             className="h-full bg-gradient-to-r from-orange-500 via-red-500 to-purple-500 shadow-[0_0_15px_rgba(249,115,22,0.6)]"
+             className="h-full bg-orange-500"
              initial={{ width: 0 }}
              animate={{ width: `${progress}%` }}
              transition={{ duration: 0.5, ease: "circOut" }}
@@ -136,7 +136,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onWarpStart }) => {
         {/* Navigation */}
         <div className="flex justify-between items-center mb-12">
             <div className="flex items-center gap-3">
-                <span className="flex items-center justify-center w-10 h-10 rounded-full bg-white/5 text-white/60 font-mono text-sm border border-white/10 backdrop-blur-sm shadow-inner">
+                <span className="flex items-center justify-center w-10 h-10 rounded-full bg-white/5 text-white/60 font-mono text-sm border border-white/10">
                     0{step + 1}
                 </span>
             </div>
@@ -189,7 +189,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onWarpStart }) => {
                         onClick={() => currentInput.trim() && handleNext(currentInput)}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="bg-white text-black px-8 py-4 rounded-2xl font-bold text-lg hover:bg-orange-500 hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
+                        className="bg-white text-black px-8 py-4 rounded-2xl font-bold text-lg hover:bg-orange-500 hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         Weiter
                     </motion.button>
@@ -213,7 +213,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onWarpStart }) => {
                             className={`
                                 relative p-5 md:p-6 rounded-2xl text-left transition-all duration-300 flex flex-col gap-2
                                 ${isSelected 
-                                    ? 'bg-orange-500 text-white shadow-[0_0_30px_rgba(249,115,22,0.4)]' 
+                                    ? 'bg-orange-500 text-white' 
                                     : 'bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/20 text-white/80'
                                 }
                             `}
@@ -240,7 +240,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onWarpStart }) => {
 
                 <div className="relative h-4 bg-white/10 rounded-full w-full">
                     <motion.div 
-                        className="absolute h-full bg-gradient-to-r from-orange-500 to-red-500 rounded-full"
+                        className="absolute h-full bg-orange-500 rounded-full"
                         style={{ 
                             width: `${((sliderValue - currentQ.min) / (currentQ.max - currentQ.min)) * 100}%` 
                         }}
@@ -269,7 +269,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onWarpStart }) => {
                      whileHover={{ scale: 1.05 }}
                      whileTap={{ scale: 0.95 }}
                      onClick={() => handleNext(sliderValue.toString())}
-                     className="bg-white text-black px-10 py-5 rounded-2xl font-black text-xl shadow-xl hover:bg-orange-500 hover:text-white transition-colors flex items-center gap-3"
+                     className="bg-white text-black px-10 py-5 rounded-2xl font-black text-xl hover:bg-orange-500 hover:text-white transition-colors flex items-center gap-3"
                    >
                      Anfrage Senden <Send className="w-5 h-5" />
                    </motion.button>

@@ -89,7 +89,7 @@ export const About = () => {
                   dragConstraints={{ left: 0, right: 0 }}
                   dragElastic={1}
                   onDragEnd={(e, { offset, velocity }) => {
-                    const swipe = swipePower(offset.x, velocity.x);
+                    const swipe = (Math.abs(offset.x) * velocity.x);
                     if (swipe < -10000) {
                       paginate(1);
                     } else if (swipe > 10000) {
@@ -101,8 +101,6 @@ export const About = () => {
                   <img 
                     src={images[currentImage].src} 
                     alt={images[currentImage].alt} 
-                    loading="lazy"
-                    decoding="async"
                     className="w-full h-full object-cover pointer-events-none"
                   />
                   
@@ -114,32 +112,15 @@ export const About = () => {
                 <button 
                   onClick={() => paginate(-1)}
                   className="p-3 rounded-full bg-black/40 hover:bg-orange-500 hover:text-white backdrop-blur-md transition-all border border-white/10 text-white shadow-lg active:scale-95"
-                  aria-label="Previous Image"
                 >
                   <ChevronLeft className="w-5 h-5" />
                 </button>
                 <button 
                   onClick={() => paginate(1)}
                   className="p-3 rounded-full bg-black/40 hover:bg-orange-500 hover:text-white backdrop-blur-md transition-all border border-white/10 text-white shadow-lg active:scale-95"
-                  aria-label="Next Image"
                 >
                   <ChevronRight className="w-5 h-5" />
                 </button>
-              </div>
-
-              {/* Pagination Dots */}
-              <div className="absolute top-4 left-1/2 -translate-x-1/2 flex gap-2 z-20 bg-black/20 px-3 py-1.5 rounded-full backdrop-blur-sm">
-                {images.map((_, idx) => (
-                  <button 
-                    key={idx}
-                    onClick={() => {
-                        const newDir = idx > currentImage ? 1 : -1;
-                        setDirection(newDir);
-                        setCurrentImage(idx);
-                    }}
-                    className={`h-1.5 rounded-full transition-all duration-300 ${idx === currentImage ? 'bg-orange-500 w-6' : 'bg-white/40 w-1.5 hover:bg-white'}`}
-                  />
-                ))}
               </div>
            </div>
 
@@ -170,9 +151,6 @@ export const About = () => {
              <p>
                Ich sitze nicht in einem Glaspalast, sondern arbeite direkt und persönlich mit dir. Wenn du anrufst, gehe ich dran. Wenn wir schreiben, antworte ich – und kein Chatbot.
              </p>
-             <p>
-               Mein Ziel? Dass du am Ende eine Seite hast, auf die du stolz bist. Keine Kopfschmerzen, kein Stress. Wir trinken (virtuell) einen Kaffee, du erzählst mir von deinem Business und ich kümmere mich um den Rest. So einfach kann das sein.
-             </p>
              <p className="border-l-2 border-orange-500 pl-6 text-white/80 italic">
                "Ehrlich, direkt und auf Augenhöhe. So macht Zusammenarbeit Spaß."
              </p>
@@ -192,8 +170,4 @@ export const About = () => {
       </div>
     </section>
   );
-};
-
-const swipePower = (offset: number, velocity: number) => {
-  return Math.abs(offset) * velocity;
 };
