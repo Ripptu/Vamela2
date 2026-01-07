@@ -1,43 +1,6 @@
-import React, { useRef, useState } from 'react';
-import { motion, useMotionValue, useMotionTemplate, useScroll, useTransform, useSpring } from 'motion/react';
-import { ArrowRight, Flame } from 'lucide-react';
-
-// --- MAGNETIC BUTTON COMPONENT ---
-const MagneticButton = ({ children, onClick }: { children?: React.ReactNode, onClick: () => void }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-
-  const handleMouse = (e: React.MouseEvent<HTMLDivElement>) => {
-    const { clientX, clientY } = e;
-    const { height, width, left, top } = ref.current!.getBoundingClientRect();
-    const middleX = clientX - (left + width / 2);
-    const middleY = clientY - (top + height / 2);
-    setPosition({ x: middleX * 0.5, y: middleY * 0.5 }); // Sensitivity
-  };
-
-  const reset = () => {
-    setPosition({ x: 0, y: 0 });
-  };
-
-  const { x, y } = position;
-  
-  // Smooth spring physics for the magnetic pull
-  const xMotion = useSpring(x, { stiffness: 150, damping: 15, mass: 0.1 });
-  const yMotion = useSpring(y, { stiffness: 150, damping: 15, mass: 0.1 });
-
-  return (
-    <motion.div
-      style={{ x: xMotion, y: yMotion }}
-      ref={ref}
-      onMouseMove={handleMouse}
-      onMouseLeave={reset}
-      onClick={onClick}
-      className="relative z-50 cursor-pointer"
-    >
-      {children}
-    </motion.div>
-  );
-};
+import React, { useRef } from 'react';
+import { motion, useMotionValue, useMotionTemplate, useScroll, useTransform } from 'motion/react';
+import { HandWrittenTitle } from './ui/hand-writing-text';
 
 export const Hero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -148,43 +111,22 @@ export const Hero: React.FC = () => {
             {/* BUTTON CONTAINER */}
             <motion.div
                style={{ y: yContent }}
-               className="flex flex-col items-center mt-12 md:mt-20"
+               className="flex flex-col items-center mt-8 md:mt-16 w-full"
             >
                 {/* 
-                   NEW MAGNETIC "LIQUID CORE" BUTTON 
+                   NEW HANDWRITTEN BUTTON 
                 */}
                 <motion.div 
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.8, duration: 0.8 }}
+                    className="w-full flex justify-center"
                 >
-                  <MagneticButton onClick={handleContactClick}>
-                    <div className="group relative">
-                      {/* Outer Glow / Blur Ring */}
-                      <div className="absolute -inset-3 bg-gradient-to-r from-orange-600 via-red-500 to-orange-600 rounded-full blur-xl opacity-40 group-hover:opacity-80 group-hover:blur-2xl transition-all duration-500 animate-pulse-slow"></div>
-                      
-                      {/* The Button Body */}
-                      <div className="relative overflow-hidden rounded-full bg-black border border-white/10 px-10 py-5 md:px-12 md:py-6 shadow-2xl transition-transform duration-300 group-hover:scale-[1.02] active:scale-[0.98]">
-                         
-                         {/* Liquid Background Effect */}
-                         <div className="absolute inset-0 w-[200%] h-[200%] top-[-50%] left-[-50%] bg-[conic-gradient(from_90deg_at_50%_50%,#00000000_50%,#f97316_100%)] opacity-0 group-hover:opacity-20 animate-spin-slow duration-[3s] group-hover:duration-[1s] transition-opacity"></div>
-                         
-                         <div className="relative z-10 flex items-center gap-4">
-                           {/* Slot Machine Text Effect */}
-                           <div className="relative h-6 overflow-hidden flex flex-col items-start justify-start">
-                              <span className="block text-base md:text-lg font-black tracking-[0.2em] uppercase text-white transition-transform duration-500 group-hover:-translate-y-full">
-                                Schreib mir
-                              </span>
-                              <span className="absolute top-full left-0 block text-base md:text-lg font-black tracking-[0.2em] uppercase text-orange-500 transition-transform duration-500 group-hover:-translate-y-full">
-                                Schreib mir
-                              </span>
-                           </div>
-
-                           <ArrowRight className="w-5 h-5 text-white transition-all duration-300 group-hover:translate-x-1 group-hover:text-orange-500" strokeWidth={3} />
-                         </div>
-                      </div>
-                    </div>
-                  </MagneticButton>
+                  <HandWrittenTitle 
+                    title="Schreib mir" 
+                    subtitle="via WhatsApp" 
+                    onClick={handleContactClick} 
+                  />
                 </motion.div>
             </motion.div>
 
