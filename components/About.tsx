@@ -9,14 +9,17 @@ const stats = [
   { label: "Qualität", value: "100%" },
 ];
 
-// Ensure two distinct images are used for the slider
 const images = [
   {
-    src: "https://i.postimg.cc/zDbjms7g/4995ad88-01bd-465e-9b20-c3178ee83d1e.png",
+    src: "https://i.postimg.cc/6pBVGcQm/304d460a-ccb0-4175-8ee1-6768640cab66.png",
     alt: "Christian Portrait",
   },
   {
-    src: "https://i.postimg.cc/wvf0wfKC/70585c11-a1e8-444e-b6aa-c12fcbe61985.png", // Using the working image as second slide
+    src: "https://i.postimg.cc/zDbjms7g/4995ad88-01bd-465e-9b20-c3178ee83d1e.png",
+    alt: "Christian Portrait 2",
+  },
+  {
+    src: "https://i.postimg.cc/wvf0wfKC/70585c11-a1e8-444e-b6aa-c12fcbe61985.png",
     alt: "Christian Working",
   }
 ];

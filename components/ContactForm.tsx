@@ -94,11 +94,11 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onWarpStart }) => {
 
   if (isCompleted) {
     return (
-      <div className="w-full max-w-2xl mx-auto min-h-[400px] flex items-center justify-center">
+      <div className="w-full max-w-2xl mx-auto min-h-[400px] flex items-center justify-center px-4">
         <motion.div 
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="text-center relative bg-[#111] border border-white/10 rounded-[40px] p-12"
+            className="text-center relative bg-[#111] border border-white/10 rounded-[40px] p-8 md:p-12 w-full"
         >
             <div className="relative inline-block mb-8">
                 <motion.div 
@@ -110,7 +110,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onWarpStart }) => {
                     <Check className="w-12 h-12 text-white" strokeWidth={3} />
                 </motion.div>
             </div>
-            <h3 className="text-4xl font-serif italic text-white mb-4">Perfekt!</h3>
+            <h3 className="text-3xl md:text-4xl font-serif italic text-white mb-4">Perfekt!</h3>
             <p className="text-white/60 text-lg">WhatsApp öffnet sich gleich...</p>
         </motion.div>
       </div>
@@ -121,7 +121,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onWarpStart }) => {
     <div className="w-full max-w-3xl mx-auto relative group perspective-1000">
       
       {/* Container */}
-      <div className="relative bg-[#111] rounded-[40px] p-8 md:p-14 overflow-hidden min-h-[500px] flex flex-col border border-white/10 shadow-2xl">
+      <div className="relative bg-[#111] rounded-[30px] md:rounded-[40px] p-6 md:p-14 overflow-hidden min-h-[450px] md:min-h-[500px] flex flex-col border border-white/10 shadow-2xl">
         
         {/* Progress Bar */}
         <div className="absolute top-0 left-0 w-full h-1 bg-white/5">
@@ -134,7 +134,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onWarpStart }) => {
         </div>
 
         {/* Navigation */}
-        <div className="flex justify-between items-center mb-12">
+        <div className="flex justify-between items-center mb-8 md:mb-12">
             <div className="flex items-center gap-3">
                 <span className="flex items-center justify-center w-10 h-10 rounded-full bg-white/5 text-white/60 font-mono text-sm border border-white/10">
                     0{step + 1}
@@ -159,12 +159,12 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onWarpStart }) => {
             transition={{ duration: 0.4 }}
             className="flex-1 flex flex-col justify-center"
           >
-            <div className="mb-10">
-                <h3 className="text-4xl md:text-6xl font-serif italic text-white mb-4 leading-tight">
+            <div className="mb-8 md:mb-10">
+                <h3 className="text-3xl md:text-6xl font-serif italic text-white mb-4 leading-tight">
                 {currentQ.question}
                 </h3>
                 {currentQ.subtext && (
-                    <p className="text-white/50 font-sans font-light">{currentQ.subtext}</p>
+                    <p className="text-white/50 font-sans font-light text-sm md:text-base">{currentQ.subtext}</p>
                 )}
             </div>
 
@@ -180,16 +180,16 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onWarpStart }) => {
                     if (e.key === 'Enter' && currentInput.trim()) handleNext(currentInput);
                   }}
                   placeholder={currentQ.placeholder}
-                  className="w-full bg-transparent border-b border-white/20 py-4 text-3xl md:text-5xl text-white outline-none focus:border-orange-500 transition-colors placeholder:text-white/10 font-sans font-bold tracking-tight"
+                  className="w-full bg-transparent border-b border-white/20 py-3 md:py-4 text-2xl md:text-5xl text-white outline-none focus:border-orange-500 transition-colors placeholder:text-white/10 font-sans font-bold tracking-tight"
                 />
                 
-                <div className="mt-12 flex justify-end">
+                <div className="mt-8 md:mt-12 flex justify-end">
                     <motion.button
                         disabled={!currentInput.trim()}
                         onClick={() => currentInput.trim() && handleNext(currentInput)}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="bg-white text-black px-8 py-4 rounded-2xl font-bold text-lg hover:bg-orange-500 hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="bg-white text-black px-6 py-3 md:px-8 md:py-4 rounded-2xl font-bold text-base md:text-lg hover:bg-orange-500 hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         Weiter
                     </motion.button>
@@ -199,7 +199,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onWarpStart }) => {
 
             {/* --- OPTIONS GRID --- */}
             {currentQ.type === 'options' && (
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-3 md:gap-4">
                 {currentQ.options?.map((option: any, idx) => {
                     const isSelected = selectionWait === option.label;
                     return (
@@ -211,15 +211,15 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onWarpStart }) => {
                             onClick={() => handleOptionSelect(option.label)}
                             whileTap={{ scale: 0.95 }}
                             className={`
-                                relative p-5 md:p-6 rounded-2xl text-left transition-all duration-300 flex flex-col gap-2
+                                relative p-4 md:p-6 rounded-2xl text-left transition-all duration-300 flex flex-col gap-2
                                 ${isSelected 
                                     ? 'bg-orange-500 text-white' 
                                     : 'bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/20 text-white/80'
                                 }
                             `}
                         >
-                            <span className="text-2xl mb-1">{option.icon}</span>
-                            <span className="text-sm md:text-lg font-bold font-sans">
+                            <span className="text-xl md:text-2xl mb-1">{option.icon}</span>
+                            <span className="text-xs md:text-lg font-bold font-sans">
                                 {option.label}
                             </span>
                         </motion.button>
@@ -230,10 +230,10 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onWarpStart }) => {
 
             {/* --- SLIDER --- */}
             {currentQ.type === 'slider' && (
-              <div className="w-full py-8">
+              <div className="w-full py-4 md:py-8">
                 
-                <div className="relative mb-16 text-center">
-                   <div className="text-6xl md:text-8xl font-sans font-black text-white tracking-tighter">
+                <div className="relative mb-12 md:mb-16 text-center">
+                   <div className="text-5xl md:text-8xl font-sans font-black text-white tracking-tighter">
                      {sliderValue < currentQ.max ? sliderValue : `${currentQ.max}+`} <span className="text-orange-500">€</span>
                    </div>
                 </div>
@@ -255,21 +255,21 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onWarpStart }) => {
                         className="absolute w-full h-full opacity-0 cursor-pointer z-20"
                     />
                     <motion.div 
-                        className="absolute top-1/2 -translate-y-1/2 h-10 w-10 bg-white rounded-full shadow-[0_0_20px_rgba(255,255,255,0.5)] flex items-center justify-center pointer-events-none z-10"
+                        className="absolute top-1/2 -translate-y-1/2 h-8 w-8 md:h-10 md:w-10 bg-white rounded-full shadow-[0_0_20px_rgba(255,255,255,0.5)] flex items-center justify-center pointer-events-none z-10"
                         style={{ 
-                            left: `calc(${((sliderValue - currentQ.min) / (currentQ.max - currentQ.min)) * 100}% - 20px)`
+                            left: `calc(${((sliderValue - currentQ.min) / (currentQ.max - currentQ.min)) * 100}% - 16px)`
                         }}
                     >
-                        <div className="w-3 h-3 bg-orange-500 rounded-full" />
+                        <div className="w-2 h-2 md:w-3 md:h-3 bg-orange-500 rounded-full" />
                     </motion.div>
                 </div>
 
-                <div className="mt-12 flex justify-center">
+                <div className="mt-10 md:mt-12 flex justify-center">
                    <motion.button 
                      whileHover={{ scale: 1.05 }}
                      whileTap={{ scale: 0.95 }}
                      onClick={() => handleNext(sliderValue.toString())}
-                     className="bg-white text-black px-10 py-5 rounded-2xl font-black text-xl hover:bg-orange-500 hover:text-white transition-colors flex items-center gap-3"
+                     className="bg-white text-black px-8 py-4 md:px-10 md:py-5 rounded-2xl font-black text-lg md:text-xl hover:bg-orange-500 hover:text-white transition-colors flex items-center gap-3"
                    >
                      Anfrage Senden <Send className="w-5 h-5" />
                    </motion.button>

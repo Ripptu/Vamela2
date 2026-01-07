@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Hero } from './components/Hero';
 import { Footer } from './components/Footer';
-import { ProcessScroll } from './components/ProcessScroll';
 import { Services } from './components/Services';
 import { Portfolio } from './components/Portfolio';
 import { About } from './components/About';
@@ -21,6 +20,7 @@ const Reveal: React.FC<{ children: React.ReactNode; className?: string; delay?: 
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const element = ref.current;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -31,12 +31,12 @@ const Reveal: React.FC<{ children: React.ReactNode; className?: string; delay?: 
       { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
     );
 
-    if (ref.current) {
-      observer.observe(ref.current);
+    if (element) {
+      observer.observe(element);
     }
 
     return () => {
-      if (ref.current) observer.unobserve(ref.current);
+      if (element) observer.unobserve(element);
     };
   }, []);
 
@@ -61,6 +61,7 @@ const MobileFloatingBar = ({ isVisible }: { isVisible: boolean }) => {
     <AnimatePresence>
       {isVisible && (
         <motion.div
+          key="floating-bar"
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
@@ -93,13 +94,25 @@ export default function App() {
   const [isWarping, setIsWarping] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [showFloatingBar, setShowFloatingBar] = useState(false);
-  const [currentHash, setCurrentHash] = useState(window.location.hash);
+  const [currentHash, setCurrentHash] = useState('');
 
   useEffect(() => {
-    const scrollReset = () => window.scrollTo(0, 0);
-    scrollReset(); // Initial reset
+    // 1. Force reset to Home on reload (remove hash) - Wrapped in try/catch for safety
+    try {
+      if (typeof window !== 'undefined' && window.location.hash) {
+        if (window.history && window.history.replaceState) {
+          window.history.replaceState(null, "", window.location.pathname + window.location.search);
+        }
+      }
+    } catch (e) {
+      console.warn("History replacement failed", e);
+    }
     
-    if ('scrollRestoration' in history) {
+    // 2. Scroll to top immediately
+    window.scrollTo(0, 0);
+    
+    // 3. Disable browser's automatic scroll restoration
+    if (typeof history !== 'undefined' && 'scrollRestoration' in history) {
       history.scrollRestoration = 'manual';
     }
 
@@ -158,10 +171,6 @@ export default function App() {
 
             <Services />
             <Portfolio />
-
-            <section className="relative z-10">
-                 <ProcessScroll />
-            </section>
             
             <FAQ />
             <About />
@@ -195,21 +204,6 @@ export default function App() {
   return (
     <div className="relative min-h-screen w-full font-sans bg-[#050505] selection:bg-orange-500 selection:text-white overflow-x-hidden">
       
-      {/* Header / Navigation */}
-      <nav 
-        className={`fixed top-0 left-0 w-full z-50 px-6 py-6 flex justify-between items-center transition-all duration-500 
-          ${isScrolled ? 'backdrop-blur-md bg-black/80 py-4 border-b border-white/5' : ''} 
-          /* On home page: hide when scrolled if hash is empty (special hero behavior). On legal pages: always show. */
-          ${isScrolled && !isLegalPage && currentHash === '' ? 'opacity-0 pointer-events-none' : 'opacity-100'}
-        `}
-      >
-         <div className="pointer-events-auto">
-             <a href="#" onClick={(e) => { e.preventDefault(); window.location.hash = ''; }}>
-                <img src="https://i.postimg.cc/tJjgBcYZ/Logo-weiss.png" alt="Vamela" className="h-8 w-auto opacity-90 hover:opacity-100 transition-opacity" />
-             </a>
-         </div>
-      </nav>
-
       {renderContent()}
       
       {/* Floating Bar only on Home */}

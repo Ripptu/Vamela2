@@ -45,11 +45,11 @@ export const ContainerScroll = ({
 
   return (
     <div
-      className="h-[60rem] md:h-[80rem] flex items-center justify-center relative p-2 md:p-20 overflow-hidden"
+      className="h-[48rem] md:h-[80rem] flex items-center justify-center relative p-2 md:p-20 overflow-hidden"
       ref={containerRef}
     >
       <div
-        className="py-10 md:py-40 w-full relative flex flex-col items-center justify-center"
+        className="py-4 md:py-40 w-full relative flex flex-col items-center justify-center"
         style={{
           perspective: "1000px", // Reduced perspective for mobile so it doesn't look too distorted
         }}
@@ -99,7 +99,8 @@ const Iphone15Pro = ({ rotateX, scale, translate, children }: IphoneProps) => {
                 transformStyle: "preserve-3d",
             }}
             // Adjusted Mobile Width to be wider (w-[90vw]) for better readability of chat
-            className="relative w-[90vw] md:w-[380px] h-[650px] md:h-[780px] flex flex-col items-center select-none touch-none"
+            // Reduced Height for mobile (h-[520px]) to fit better in view
+            className="relative w-[90vw] md:w-[380px] h-[520px] md:h-[780px] flex flex-col items-center select-none touch-none"
         >
             {/* ==================== PHONE BODY (Titanium Frame) ==================== */}
             <div 
